@@ -17,7 +17,7 @@ fn main() {
     let alphabets: Alphabets = match to_alphabets(&cli) {
         Ok(a) => a,
         Err(reason) => {
-            println!("Invalid option: err: ${reason}");
+            eprintln!("Invalid option: err: ${reason}");
             exit(1);
         }
     };
@@ -28,7 +28,7 @@ fn main() {
     match output::Output::new(passwords).to_json() {
         Ok(ps) => println!("{ps}"),
         Err(reason) => {
-            println!("Invalid json: err: ${reason}");
+            eprintln!("Invalid json: err: ${reason}");
             exit(1);
         }
     };
