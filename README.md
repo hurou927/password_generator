@@ -1,5 +1,10 @@
-# Password Generator
+# Password Generator(pwgn)
+## Install
+```
+$ cargo install --git https://github.com/hurou927/password_generator.git
+```
 
+## Usage
 ```
 Usage: password-generator [OPTIONS]
 
@@ -19,39 +24,24 @@ Options:
 ## Example
 
 ```sh
-❯ cargo run -- -l 10 -N 10 | jq .
+❯ pwgn -l 20 -N 5 | jq .
 {
   "version": "1.0.0",
   "passwords": [
     {
-      "text": "$E8OvG&-4z"
+      "text": "9<-oBM\"f(jD}:{jTub2["
     },
     {
-      "text": "LA[Rw\\_8B$"
+      "text": "k4:rjW[HNaY)x4>%r-WL"
     },
     {
-      "text": "3dYd8HD*qz"
+      "text": "*ZN\\|V@y65j7.6qvX450"
     },
     {
-      "text": ",#7yWm{>dq"
+      "text": "l_;6YR^w+;@I9.BH0Fyd"
     },
     {
-      "text": "]EE~39<ps}"
-    },
-    {
-      "text": "#;],6+X0l#"
-    },
-    {
-      "text": "hHu.iGA~7E"
-    },
-    {
-      "text": "D_E=5!p:U!"
-    },
-    {
-      "text": "G=+1F*Sb~4"
-    },
-    {
-      "text": "tUs4$ox\"^Q"
+      "text": "=pjW{lK#5!m(S\\Q%4AjZ"
     }
   ]
 }
