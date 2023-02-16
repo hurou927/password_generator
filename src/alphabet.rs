@@ -1,4 +1,3 @@
-
 use rand::{rngs::ThreadRng, seq::SliceRandom};
 
 pub struct AlphabetCondition {
@@ -26,7 +25,6 @@ impl AlphabetCondition {
 
 pub struct Alphabets {
     conditions: Vec<AlphabetCondition>,
-    all_alphabet: AlphabetCondition,
 }
 
 impl Alphabets {
@@ -38,41 +36,43 @@ impl Alphabets {
         simbol_min_length: usize,
         simbol_chars: Vec<u8>,
     ) -> Alphabets {
-        let alphabet_conditions: Vec<AlphabetCondition> = vec![
+
+        // abc...xyz: lower_min_length
+        // ABC...XYZ: upper_min_length
+        // 012...789: number_min_length
+        // ^&*...#$%: simbol_chars
+        // ab..yzAB..YZ01..89^&..$%: length - SUM(*_min_length]
+        let mut alphabet_conditions: Vec<AlphabetCondition> = vec![
             AlphabetCondition::new((b'a'..=b'z').collect(), lower_min_length),
             AlphabetCondition::new((b'A'..=b'Z').collect(), upper_min_length),
             AlphabetCondition::new((b'0'..=b'9').collect(), number_min_length),
             AlphabetCondition::new(simbol_chars, simbol_min_length),
         ];
-        // 残りの文字数文の文字を対象となるすべての文字群から選択する
-        let rest: Vec<u8> = alphabet_conditions
-            .iter()
-            .filter(|x| x.min_length > 0)
-            .flat_map(|x| x.chars.clone())
-            .collect();
-        let rest = AlphabetCondition {
-            chars: rest,
+        let all_chars = AlphabetCondition {
+            chars: alphabet_conditions
+                .iter()
+                .filter(|x| x.min_length > 0)
+                .flat_map(|x| x.chars.clone())
+                .collect(),
             min_length: length
                 - alphabet_conditions
                     .iter()
                     .map(|x| x.min_length)
                     .sum::<usize>(),
         };
+
+        alphabet_conditions.push(all_chars);
+
         Alphabets {
             conditions: alphabet_conditions,
-            all_alphabet: rest,
         }
-
     }
     pub fn gen_password(&self, rng: &mut ThreadRng) -> String {
-        // 各文字グループから最低長文の文字をランダムに選択する
         let mut password = self
             .conditions
             .iter()
             .flat_map(|x| x.choose_chars(rng))
             .collect::<Vec<u8>>();
-
-        password.extend(self.all_alphabet.choose_chars(rng));
 
         // Shuffle
         password.shuffle(rng);
