@@ -14,7 +14,7 @@ pub struct Output {
 impl Output {
     pub fn new(passwords: Vec<String>) -> Self {
         Output {
-            version: "1.0.0".to_owned(),
+            version:  env!("CARGO_PKG_VERSION").to_owned(),
             passwords: passwords
                 .iter()
                 .map(|x| Password {
