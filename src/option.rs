@@ -15,7 +15,7 @@ pub struct Cli {
     pub upper_min_length: usize,
 
     #[arg(short = 's', default_value_t = 1)]
-    pub simbol_min_length: usize,
+    pub symbol_min_length: usize,
 
     #[arg(short = 'n', default_value_t = 1)]
     pub number_min_length: usize,
@@ -23,9 +23,9 @@ pub struct Cli {
     #[arg(
         short = 'S',
         long,
-        default_value = r###"~`!@#$%^&*()_-+={[}]|\:;"'<,>.?/"###
+        default_value = r###"!"#%&'()*+,-./:;<=>?@[\]^_`{|}~$"###
     )]
-    pub simbol_chars: String,
+    pub symbol_chars: String,
 
     #[arg(short = 'N', default_value_t = 1)]
     pub num_passwords: usize,
@@ -44,7 +44,7 @@ fn validate(cli: &Cli) -> Result<(), String> {
         return Err("invalid preset".to_string());
     }
     let sum_of_min_length =
-        cli.lower_min_length + cli.lower_min_length + cli.simbol_min_length + cli.number_min_length;
+        cli.lower_min_length + cli.lower_min_length + cli.symbol_min_length + cli.number_min_length;
 
     if sum_of_min_length == 0 {
         Err("the sum of min_length-s == 0".to_string())
@@ -58,7 +58,7 @@ fn validate(cli: &Cli) -> Result<(), String> {
 pub fn to_alphabets(cli: &Cli) -> Result<Alphabets, String> {
     validate(cli)?;
 
-    let simbol_chars = cli.simbol_chars.as_bytes().to_vec();
+    let symbols = cli.symbol_chars.as_bytes().to_vec();
 
     let alphabets = if cli.preset == 1 {
         Alphabets::new(cli.length, 1, 0, 1, 0, Vec::new())
@@ -68,8 +68,8 @@ pub fn to_alphabets(cli: &Cli) -> Result<Alphabets, String> {
             cli.lower_min_length,
             cli.upper_min_length,
             cli.number_min_length,
-            cli.simbol_min_length,
-            simbol_chars,
+            cli.symbol_min_length,
+            symbols,
         )
     };
     Ok(alphabets)

@@ -33,20 +33,20 @@ impl Alphabets {
         lower_min_length: usize,
         upper_min_length: usize,
         number_min_length: usize,
-        simbol_min_length: usize,
-        simbol_chars: Vec<u8>,
+        symbol_min_length: usize,
+        symbols: Vec<u8>,
     ) -> Alphabets {
 
         // abc...xyz: lower_min_length
         // ABC...XYZ: upper_min_length
         // 012...789: number_min_length
-        // ^&*...#$%: simbol_chars
+        // ^&*...#$%: symbol_chars
         // ab..yzAB..YZ01..89^&..$%: length - SUM(*_min_length]
         let mut alphabet_conditions: Vec<AlphabetCondition> = vec![
             AlphabetCondition::new((b'a'..=b'z').collect(), lower_min_length),
             AlphabetCondition::new((b'A'..=b'Z').collect(), upper_min_length),
             AlphabetCondition::new((b'0'..=b'9').collect(), number_min_length),
-            AlphabetCondition::new(simbol_chars, simbol_min_length),
+            AlphabetCondition::new(symbols, symbol_min_length),
         ];
         let all_chars = AlphabetCondition {
             chars: alphabet_conditions

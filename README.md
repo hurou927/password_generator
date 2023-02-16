@@ -9,7 +9,7 @@ Options:
   -A <UPPER_MIN_LENGTH>              [default: 1]
   -s <SIMBOL_MIN_LENGTH>             [default: 1]
   -n <NUMBER_MIN_LENGTH>             [default: 1]
-  -S, --simbol-chars <SIMBOL_CHARS>  [default: ~`!@#$%^&*()_-+={[}]|\:;"'<,>.?/]
+  -S, --symbol-chars <SIMBOL_CHARS>  [default: ~`!@#$%^&*()_-+={[}]|\:;"'<,>.?/]
   -N <NUM_PASSWORDS>                 [default: 1]
   -p, --preset <PRESET>              1: week password(half-width & number), otherwise: custom [default: 0]
   -h, --help                         Print help
