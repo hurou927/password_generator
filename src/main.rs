@@ -28,7 +28,7 @@ fn main() {
     match output::Output::new(passwords).to_json() {
         Ok(ps) => println!("{ps}"),
         Err(reason) => {
-            println!("Invalid option: err: ${reason}");
+            println!("Invalid json: err: ${reason}");
             exit(1);
         }
     };
