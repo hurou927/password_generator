@@ -23,6 +23,8 @@ Options:
 
 ## Example
 
+### 1.
+
 ```sh
 ❯ pwgn -l 20 -N 5 | jq .
 {
@@ -46,3 +48,11 @@ Options:
   ]
 }
 ```
+
+### 2.
+
+```
+❯ pwgn -p 1 | jq '.passwords[0].text' -rj
+pbn44rhmf9ub
+```
+
